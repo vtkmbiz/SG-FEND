@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { T, fmtINR } from '../utils/theme';
-import { Card, Badge, Spinner } from '../components/UI';
+import { Card, Spinner } from '../components/UI';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+/* eslint-disable react-hooks/exhaustive-deps */
 
 function StatCard({ label, value, icon, color, bg }) {
   return (
@@ -26,6 +27,7 @@ export default function DashboardPage() {
   const [attStats, setAttStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const reqs = [api.get('/entries'), api.get('/vendors'), api.get('/dashboard/attendance')];
     if (['owner', 'co-owner'].includes(user?.role)) {

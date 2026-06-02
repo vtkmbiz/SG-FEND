@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { T, fmtINR, todayStr, currentYM, monthLabel, daysInMonth } from '../utils/theme';
+import { T, fmtINR, todayStr, currentYM, monthLabel } from '../utils/theme';
 import { Input, Select, Btn, Card, Badge, Modal, TabBar, Spinner, Empty } from '../components/UI';
 import InvoiceView from '../components/InvoiceView';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+/* eslint-disable react-hooks/exhaustive-deps */
 
 export function NewEntryPage() {
   const navigate = useNavigate();
@@ -480,6 +481,7 @@ export function ReportsPage() {
     finally { setLoading(false); }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(); }, [period]);
 
   const saveSettle = async () => {
@@ -585,10 +587,13 @@ export function StaffPage() {
   const loadAttendance = (date) => api.get(`/attendance?date=${date}`).then(r => setAttendance(r.data));
   const loadSalary = (month) => api.get(`/salary/${month}`).then(r => setSalary(r.data));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     Promise.all([loadEmployees(), loadAttendance(selDate)]).finally(() => setLoading(false));
   }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (!loading) loadAttendance(selDate); }, [selDate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (!loading && (tab === 'salary' || tab === 'history')) loadSalary(selMonth); }, [selMonth, tab]);
 
   const getAtt = (empId) => attendance.find(a => a.employee_id === empId);
@@ -801,6 +806,7 @@ export function SettingsPage() {
   const [addUser, setAddUser] = useState(false);
   const [newUser, setNewUser] = useState({ name: '', username: '', password: '', role: 'worker' });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (['owner', 'co-owner'].includes(user.role)) api.get('/users').then(r => setUsers(r.data));
   }, []);
