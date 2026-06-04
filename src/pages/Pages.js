@@ -668,6 +668,8 @@ export function StaffPage() {
                           {inactive ? 'Set Active' : 'Set Inactive'}
                         </button>
                       )}
+
+
                     </div>
                   </div>
                   {inactive ? (
